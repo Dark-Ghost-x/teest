@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📨 فرم تماس تستی - تلگرام</title>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+        
+        body {
+            background: #0a0a1a;
+            color: #f0e6ff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-image: radial-gradient(circle at 50% 50%, rgba(157, 78, 221, 0.1) 0%, transparent 50%);
+        }
+        
+        .container {
+            background: #151530;
+            border-radius: 15px;
+            padding: 30px;
+            width: 100%;
+            max-width: 450px;
+            border: 2px solid #9d4edd;
+            box-shadow: 0 0 25px rgba(157, 78, 221, 0.4);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #9d4edd;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #c77dff;
+            font-weight: bold;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid #7b2cbf;
+            border-radius: 8px;
+            color: #f0e6ff;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #9d4edd;
+            box-shadow: 0 0 10px rgba(157, 78, 221, 0.5);
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(90deg, #7b2cbf, #9d4edd);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(123, 44, 191, 0.5);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .status {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+        }
+        
+        .success {
+            background: rgba(0, 255, 157, 0.1);
+            color: #00ff9d;
+            border: 1px solid rgba(0, 255, 157, 0.3);
+            display: block;
+        }
+        
+        .error {
+            background: rgba(255, 71, 87, 0.1);
+            color: #ff4757;
+            border: 1px solid rgba(255, 71, 87, 0.3);
+            display: block;
+        }
+        
+        .config {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 25px;
+            border: 1px dashed #7b2cbf;
+            font-size: 14px;
+        }
+        
+        .config h3 {
+            color: #9d4edd;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .info {
+            color: #c77dff;
+            font-size: 12px;
+            margin-top: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📨 فرم تماس تستی</h1>
+        
+        <form id="contactForm">
+            <div class="form-group">
+                <label for="name">👤 نام شما</label>
+                <input type="text" id="name" placeholder="نام خود را وارد کنید" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="message">💬 پیام شما</label>
+                <textarea id="message" placeholder="پیام خود را بنویسید..." required></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn" id="submitBtn">
+                <span id="btnText">ارسال پیام به تلگرام</span>
+            </button>
+        </form>
+        
+        <div id="status" class="status"></div>
+        
+        <div class="config">
+            <h3>⚙️ تنظیمات تست</h3>
+            <p>این فرم از طریق یک CORS Proxy پیام‌ها را به تلگرام می‌فرستد.</p>
+            <p><strong>توجه:</strong> این روش فقط برای تست مناسب است. برای استفاده عمومی باید از سرور پایتون استفاده کنید.</p>
+        </div>
+        
+        <div class="info">
+            <p>🔄 تست شده با GitHub Pages</p>
+        </div>
+    </div>
+
+    <script>
+        // 🔧 تنظیمات شما - اینجا رو پر کن!
+        const BOT_TOKEN = "8534398084:AAHrS0JVQwsKkVe0b92MxLDIa2-58gpJ1Kw";  // توکن ربات خودت رو اینجا بزار
+        const CHAT_ID = "1511185718";      // چت آیدی خودت رو اینجا بزار
+        
+        // آدرس CORS Proxy (برای دور زدن محدودیت مرورگر)
+        // این سرویس رایگان است اما ممکن است گاهی در دسترس نباشد
+        const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
+        const TELEGRAM_API = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+        
+        // انتخاب عناصر HTML
+        const form = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const statusDiv = document.getElementById('status');
+        
+        // تابع نمایش پیام وضعیت
+        function showStatus(message, type) {
+            statusDiv.textContent = message;
+            statusDiv.className = `status ${type}`;
+            
+            // مخفی کردن بعد از 5 ثانیه
+            setTimeout(() => {
+                statusDiv.className = 'status';
+                statusDiv.textContent = '';
+            }, 5000);
+        }
+        
+        // تابع ارسال پیام به تلگرام
+        async function sendToTelegram(name, message) {
+            // چک کردن تنظیمات
+            if (BOT_TOKEN.includes('YOUR_') || CHAT_ID.includes('YOUR_')) {
+                showStatus('❌ لطفا توکن و چت آیدی را تنظیم کنید!', 'error');
+                return false;
+            }
+            
+            try {
+                // ساخت متن پیام برای تلگرام
+                const telegramMessage = `📨 پیام تستی از GitHub Pages\n\n👤 نام: ${name}\n📝 پیام: ${message}\n🕒 زمان: ${new Date().toLocaleString('fa-IR')}`;
+                
+                // ساخت URL کامل با CORS Proxy
+                const url = `${CORS_PROXY}${TELEGRAM_API}`;
+                
+                // ارسال درخواست به تلگرام
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: telegramMessage,
+                        parse_mode: 'HTML'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.ok) {
+                    console.log('✅ پیام با موفقیت ارسال شد:', data);
+                    return true;
+                } else {
+                    console.error('❌ خطا در ارسال:', data);
+                    return false;
+                }
+                
+            } catch (error) {
+                console.error('❌ خطا در ارتباط:', error);
+                return false;
+            }
+        }
+        
+        // مدیریت ارسال فرم
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault(); // جلوگیری از ارسال سنتی فرم
+            
+            // گرفتن مقادیر فرم
+            const name = document.getElementById('name').value.trim();
+            const message = document.getElementById('message').value.trim();
+            
+            // اعتبارسنجی
+            if (!name || !message) {
+                showStatus('لطفا نام و پیام را وارد کنید!', 'error');
+                return;
+            }
+            
+            // غیرفعال کردن دکمه در حین ارسال
+            submitBtn.disabled = true;
+            btnText.textContent = 'در حال ارسال...';
+            
+            try {
+                // ارسال پیام
+                const success = await sendToTelegram(name, message);
+                
+                if (success) {
+                    showStatus('✅ پیام شما با موفقیت ارسال شد!', 'success');
+                    // پاک کردن فرم
+                    form.reset();
+                } else {
+                    showStatus('❌ خطا در ارسال پیام!', 'error');
+                }
+                
+            } catch (error) {
+                showStatus('❌ خطا در ارتباط با سرور!', 'error');
+            } finally {
+                // فعال کردن دکمه
+                submitBtn.disabled = false;
+                btnText.textContent = 'ارسال پیام به تلگرام';
+            }
+        });
+        
+        // نمایش وضعیت اولیه
+        window.addEventListener('load', () => {
+            if (BOT_TOKEN.includes('YOUR_') || CHAT_ID.includes('YOUR_')) {
+                showStatus('⚠️ لطفا توکن و چت آیدی را در کد تنظیم کنید!', 'error');
+            } else {
+                console.log('🚀 فرم تستی آماده است!');
+                console.log(`🤖 توکن: ${BOT_TOKEN.substring(0, 10)}...`);
+                console.log(`👤 چت آیدی: ${CHAT_ID}`);
+            }
+        });
+    </script>
+</body>
+  </html>
