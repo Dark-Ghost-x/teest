@@ -1,1 +1,139 @@
-Hello
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📨 ارسال پیام</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
+        .container { background: rgba(255, 255, 255, 0.95); padding: 30px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); width: 100%; max-width: 450px; }
+        h1 { color: #333; text-align: center; margin-bottom: 25px; font-size: 1.8rem; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; color: #555; font-weight: 600; }
+        input, textarea { width: 100%; padding: 14px; border: 2px solid #e1e5e9; border-radius: 10px; font-size: 16px; transition: all 0.3s; background: #f8f9fa; }
+        input:focus, textarea:focus { outline: none; border-color: #667eea; background: white; box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1); }
+        textarea { min-height: 130px; resize: vertical; }
+        .char-count { text-align: left; font-size: 13px; color: #888; margin-top: 6px; direction: ltr; }
+        .submit-btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 16px; width: 100%; border-radius: 10px; font-size: 17px; font-weight: 600; cursor: pointer; transition: all 0.3s; margin-top: 10px; }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 7px 14px rgba(102, 126, 234, 0.4); }
+        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .status { padding: 14px; border-radius: 10px; margin-top: 20px; text-align: center; font-weight: 500; display: none; animation: fadeIn 0.4s; }
+        .success { background: #e7f7ef; color: #0a5c36; border: 1px solid #b1e6cb; display: block; }
+        .error { background: #fdeded; color: #7a1a1a; border: 1px solid #f5c6cb; display: block; }
+        .info { text-align: center; margin-top: 25px; color: #666; font-size: 14px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 480px) { .container { padding: 20px; } h1 { font-size: 1.5rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>پیام خود را ارسال کنید</h1>
+        
+        <form id="contactForm">
+            <div class="form-group">
+                <label for="name">نام شما</label>
+                <input type="text" id="name" placeholder="نام یا نام کاربری" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="message">پیام</label>
+                <textarea id="message" placeholder="متن پیام را اینجا بنویسید..." required maxlength="1000"></textarea>
+                <div class="char-count"><span id="charCount">0</span>/1000 کاراکتر</div>
+            </div>
+            
+            <button type="submit" class="submit-btn" id="submitBtn">
+                <span id="btnText">ارسال پیام</span>
+            </button>
+        </form>
+        
+        <div id="status" class="status"></div>
+        <div class="info">پیام شما مستقیم به تلگرام مدیر ارسال می‌شود.</div>
+    </div>
+
+    <script>
+        // 🔧 مهم: این آدرس را با آدرس واقعی سرور FastAPI خودت روی Render عوض کن
+        // مثال: https://your-bot-name.onrender.com/send
+        const API_URL = 'https://your-render-app-name.onrender.com/send';
+        
+        // انتخاب عناصر
+        const form = document.getElementById('contactForm');
+        const messageInput = document.getElementById('message');
+        const charCount = document.getElementById('charCount');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const statusDiv = document.getElementById('status');
+        
+        // شمارنده کاراکتر
+        messageInput.addEventListener('input', () => {
+            const count = messageInput.value.length;
+            charCount.textContent = count;
+            charCount.style.color = count > 950 ? '#ff4757' : '#888';
+        });
+        
+        // ارسال فرم
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value.trim();
+            const message = document.getElementById('message').value.trim();
+            
+            // اعتبارسنجی ساده
+            if (!name || name.length < 2) {
+                showStatus('لطفاً نام معتبر وارد کنید (حداقل ۲ حرف)', 'error');
+                return;
+            }
+            if (!message || message.length < 5) {
+                showStatus('پیام باید حداقل ۵ حرف باشد', 'error');
+                return;
+            }
+            
+            // غیرفعال کردن دکمه
+            submitBtn.disabled = true;
+            btnText.textContent = 'در حال ارسال...';
+            
+            try {
+                // ارسال درخواست به سرور FastAPI
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, message })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    showStatus('✅ پیام با موفقیت ارسال شد', 'success');
+                    form.reset();
+                    charCount.textContent = '0';
+                    charCount.style.color = '#888';
+                } else {
+                    showStatus(`❌ ${data.message || 'خطا در ارسال'}`, 'error');
+                }
+            } catch (error) {
+                showStatus('❌ مشکل در ارتباط با سرور', 'error');
+                console.error('Error:', error);
+            } finally {
+                submitBtn.disabled = false;
+                btnText.textContent = 'ارسال پیام';
+            }
+        });
+        
+        // تابع نمایش وضعیت
+        function showStatus(text, type) {
+            statusDiv.textContent = text;
+            statusDiv.className = `status ${type}`;
+            setTimeout(() => {
+                statusDiv.className = 'status';
+                statusDiv.textContent = '';
+            }, 4500);
+        }
+        
+        // راهنمای اولیه
+        console.log('📨 فرم آماده است. آدرس API:', API_URL);
+        if (API_URL.includes('your-render-app-name')) {
+            console.warn('⚠️ لطفاً آدرس API را در خط 53 با آدرس واقعی Render خود عوض کنید.');
+        }
+    </script>
+</body>
+  </html>
